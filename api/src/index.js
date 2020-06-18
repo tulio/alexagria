@@ -3,29 +3,11 @@ const { ApolloServer, gql } = require('apollo-server-express');
 require('dotenv').config();
 
 const db = require('./db');
+const models = require('./models');
 
 // Run the server on a port specified in our .env file or port 4004
 const port = process.env.PORT || 4004;
 const DB_HOST = process.env.DB_HOST;
-
-let books = [
-	{
-		id: '1',
-		title: 'This is book title', 
-		author: 'John Doe'
-	},
-	{
-		id: '2',
-		title: 'This is another book title', 
-		author: 'John Doe'
-	},
-	{
-		id: '3',
-		title: 'Oh hey look, another book title', 
-		author: 'John Doe'
-	}
-]
-
 
 // Construct a schema, using GraphQL schema language
 const typeDefs = gql`
@@ -34,11 +16,13 @@ const typeDefs = gql`
 		title: String!
 		author: String!
 	}
+
   type Query {
     hello: String!
     books: [Book!]!
     book(id: ID!): Book!
   }
+  
   type Mutation {
     newBook(title: String!): Book
   }
@@ -48,9 +32,11 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     hello: () => 'Hello world!', 
-    books: () => books, 
-    book: (parent, args) => {
-    	return books.find(book => book.id === args.id)
+    books: async () => {
+    	return await models.Book.find();
+    }, 
+    book: async (parent, args) => {
+    	return await models.Book.findById(args.id);
     }
   }, 
   Mutation: {
