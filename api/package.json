@@ -1,5 +1,5 @@
 {
-  "name": "notedly-api",
+  "name": "alexandria-api",
   "version": "1.0.0",
   "description": "Just a library",
   "main": "src/index.js",

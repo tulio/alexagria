@@ -7,7 +7,7 @@ const models = require('./models');
 
 // Run the server on a port specified in our .env file or port 4004
 const port = process.env.PORT || 4004;
-const DB_HOST = process.env.DB_HOST;
+const DB_HOST = process.env.DB_HOST || 'mongodb://localhost:27017/alexandria';
 
 // Construct a schema, using GraphQL schema language
 const typeDefs = gql`
