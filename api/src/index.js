@@ -7,7 +7,7 @@ const models = require('./models');
 
 // Run the server on a port specified in our .env file or port 4004
 const port = process.env.PORT || 4004;
-const DB_HOST = process.env.DB_HOST || 'mongodb://localhost:27017/alexandria';
+const DB_HOST = process.env.DB_HOST;
 
 // Construct a schema, using GraphQL schema language
 const typeDefs = gql`
@@ -55,7 +55,7 @@ const resolvers = {
 const app = express();
 
 // Connect to the database
-db.connect(DB_HOST);
+db.connect('DB_HOST');
 
 // Apollo Server setup
 const server = new ApolloServer({ typeDefs, resolvers });
