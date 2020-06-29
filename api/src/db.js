@@ -12,7 +12,7 @@ module.exports = {
     // Use the new server discovery & monitoring engine
     mongoose.set('useUnifiedTopology', true);
     // Connect to the DB
-    mongoose.connect(DB_HOST);
+    mongoose.connect(process.env.DB_HOST);
     // Log an error if we fail to connect
     mongoose.connection.on('error', err => {
       console.error(err);
