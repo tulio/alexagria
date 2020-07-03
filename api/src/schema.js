@@ -6,9 +6,17 @@ module.exports = gql`
   type Book {
     id: ID!
     title: String!
-    author: String!
+    author: User!
     createdAt: DateTime!
     updatedAt: DateTime!
+  }
+
+  type User {
+    id: ID!
+    username: String!
+    email: String!
+    avatar: String
+    books: [Book!]!
   }
 
   type Query {
@@ -20,5 +28,7 @@ module.exports = gql`
     newBook(title: String!): Book
     updateBook(id: ID!, title: String!): Book!
     deleteBook(id: ID!): Boolean!
+    signUp(username: String!, email: String!, password: String!): String!
+    signIn(username: String, email: String, password: String!): String!
   }
 `;
