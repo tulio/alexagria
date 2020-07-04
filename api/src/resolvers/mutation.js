@@ -11,7 +11,7 @@ const gravatar = require('../util/gravatar');
 module.exports = {
   newBook: async (parent, args, { models }) => {
     return await models.Book.create({
-      content: args.content,
+      title: args.title,
       author: 'Túlio Freitas'
     });
   },
